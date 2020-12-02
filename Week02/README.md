@@ -5,7 +5,7 @@ sql.ErrNoRows这个错误应该在dao层中处理掉，不应该在service层去
 # 代码实现
 
 ## model层
-`
+```
 type Persion struct {
 	Name string
 	Age  string
@@ -14,10 +14,10 @@ type Persion struct {
 func (p *Persion) TableName() string {
 	return "persion"
 }
-`
+```
 
 ## dao层
-`
+```
 type DBService struct {
 	db *Db
 }
@@ -33,9 +33,9 @@ func (this *DBService) FindPersion() ([]model.Persion, error) {
 	}
 	return data, err
 }
-`
+```
 ## service层
-`
+```
 type Service struct {
 	db *dao.DBService
 }
@@ -47,10 +47,10 @@ func NewService() *Service {
 func (this *Service) FindPersion() ([]model.Persion, error) {
 	return this.db.FindPersion()
 }
-`
+```
 
 ## main
-`
+```
 func main() {
 	service := service.NewService()
 	data, err := service.FindPersion()
@@ -59,4 +59,4 @@ func main() {
 	}
 	fmt.Println("persion info: %+v", data)
 }
-`
+```
