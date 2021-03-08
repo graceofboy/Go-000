@@ -3,6 +3,7 @@ package dao
 import (
 	"database/sql"
 	"errors"
+	"strings"
 )
 
 type DBService struct {
@@ -15,6 +16,7 @@ func NewDBService() *DBService {
 
 func (this *DBService) FindPersion() ([]model.Persion, error) {
 	data, err := this.db.query("select * from persion")
+
 	if err != nil {
 		if errors.Is(sql.ErrNoRows) {
 			// 当sql.ErrNoRows时，这里把error吞掉可不可以，直接返回一个nil
@@ -22,5 +24,6 @@ func (this *DBService) FindPersion() ([]model.Persion, error) {
 		}
 		return nil, errors.Wrap(err, "query persion error: ")
 	}
+
 	return data, err
 }
