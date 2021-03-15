@@ -24,7 +24,7 @@ func main() {
 		go func() {
 			<-ctx.Done()
 			fmt.Println("http ctx done")
-			svr.Shutdown(context.TODO())
+			svr.Shutdown(ctx)
 		}()
 		return svr.ListenAndServe()
 	})
