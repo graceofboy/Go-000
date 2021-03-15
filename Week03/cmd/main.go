@@ -15,16 +15,18 @@ import (
 
 func main() {
 	g, ctx := errgroup.WithContext(context.Background())
-	svr := http.NewServeMux()
+	svr := &http.Server{
+		Addr: ":8080",
+	}
 
 	g.Go(func() error {
 		fmt.Println("http")
 		go func() {
-			<-ctx.Done() //?
+			<-ctx.Done()
 			fmt.Println("http ctx done")
-			svr.Shutdown(context.TODO()) //?
+			svr.Shutdown(context.TODO())
 		}()
-		return svt.Start()
+		return svr.ListenAndServe()
 	})
 
 	g.Go(func() error {
