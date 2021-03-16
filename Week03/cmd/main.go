@@ -30,8 +30,8 @@ func main() {
 	})
 
 	g.Go(func() error {
-		exitSignal := []os.Signal{os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT} // ?
-		sig := make(chan os.Signal, len(exitSignal))                                              //?
+		exitSignal := []os.Signal{os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT}
+		sig := make(chan os.Signal, len(exitSignal))                                             
 		signal.Notify(sig, exitSignal...)
 		for {
 			fmt.Println("signal")
